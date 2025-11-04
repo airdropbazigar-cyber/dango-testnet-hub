@@ -118,17 +118,6 @@ html, body {
   cursor: pointer;
 }
 
-.register-btn {
-  background: #FF6B35;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 14px;
-}
-
 .results {
   display: flex;
   gap: 15px;
