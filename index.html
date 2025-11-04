@@ -3,83 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🍡 Dango Dashboard</title>
+  <title>Dango Testnet Hub</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Mochi</text></svg>">
 </head>
 <body>
+
+  <!-- DANGO WATERMARK BACKGROUND -->
+  <div class="dango-watermark">DANGO</div>
+
   <div class="container">
-
     <!-- Top Bar -->
-    <header class="top-bar">
-      <div class="logo">🍡 <span>Dango</span></div>
+    <div class="top-bar">
+      <div class="logo">
+        <span style="color:#FF6B35;">Mochi</span> Dango
+      </div>
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="Search for addresses..." />
-        <button onclick="searchAddress()">🔍</button>
+        <input type="text" placeholder="Enter wallet address..." id="wallet-input" />
+        <button onclick="fetchData()">Search</button>
       </div>
-      <button class="register-btn">Register</button>
-    </header>
+      <button class="register-btn" onclick="openModal()">Register</button>
+    </div>
 
-    <!-- Results (Hidden Initially) -->
-    <div id="results" class="results">
+    <!-- Results -->
+    <div class="results" id="results">
       <div class="result-card">
-        <h3>📊 Volume Tracker</h3>
-        <p id="volume-result">Enter address to fetch real volume...</p>
-        <div id="volume-loading" class="spinner"></div>
+        <h3>Mochi Volume Tracker</h3>
+        <p id="volume">Loading...</p>
       </div>
       <div class="result-card">
-        <h3>🏆 NFT Claimed?</h3>
-        <p id="nft-result">Check OAT status...</p>
-        <div id="nft-loading" class="spinner"></div>
+        <h3>Mochi NFT Claimed?</h3>
+        <p id="nft-status">Check address</p>
       </div>
     </div>
 
-    <!-- Bottom 4 Buttons -->
-    <nav class="bottom-nav">
-      <button class="nav-btn" onclick="openQuiz()">
-        <div class="icon">❓</div>
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+      <button class="nav-btn" onclick="openModal('quiz')">
+        <span class="icon">Question</span>
         <span>Quiz</span>
       </button>
-      <button class="nav-btn" onclick="alert('Volume Tracker Active!')">
-        <div class="icon">📈</div>
+      <button class="nav-btn" onclick="fetchData()">
+        <span class="icon">Bar Chart</span>
         <span>Volume</span>
       </button>
-      <button class="nav-btn" onclick="openFeedback()">
-        <div class="icon">💬</div>
+      <button class="nav-btn" onclick="alert('Feedback sent!')">
+        <span class="icon">Chat Bubble</span>
         <span>Feedback</span>
       </button>
-      <button class="nav-btn" onclick="checkNFT(document.getElementById('search-input').value)">
-        <div class="icon">🎖️</div>
+      <button class="nav-btn" onclick="openModal('nft')">
+        <span class="icon">Trophy</span>
         <span>NFT</span>
       </button>
-    </nav>
-
-  </div>
-
-  <!-- Quiz Modal -->
-  <div id="quiz-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeQuiz()">×</span>
-      <h2>🍡 Dango Quiz</h2>
-      <div id="question"></div>
-      <div id="options"></div>
-      <button id="next-btn">Next →</button>
-      <p id="result"></p>
-      <canvas id="badge-canvas" width="300" height="150"></canvas>
-      <button id="download-badge" onclick="downloadBadge()">Download Badge</button>
     </div>
   </div>
 
-  <!-- Feedback Modal -->
-  <div id="feedback-modal" class="modal">
+  <!-- Modal -->
+  <div class="modal" id="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeFeedback()">×</span>
-      <h2>💬 Feedback</h2>
-      <textarea id="feedback-text" placeholder="CLOB is fire!"></textarea>
-      <button onclick="sendFeedback()">Submit & Tweet</button>
+      <span class="close" onclick="closeModal()">×</span>
+      <div id="modal-body"></div>
     </div>
   </div>
+
+  <!-- Spinner -->
+  <div class="spinner" id="spinner"></div>
+
+  <!-- Badge Canvas (Hidden) -->
+  <canvas id="badge-canvas" width="300" height="300"></canvas>
 
   <script src="script.js"></script>
 </body>
