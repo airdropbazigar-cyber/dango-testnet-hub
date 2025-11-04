@@ -6,11 +6,21 @@ header h1 { font-size: 28px; }
 header p { font-size: 14px; opacity: 0.9; }
 
 .tabs { display: flex; background: #f0f0f0; }
-.tab-btn { flex: 1; padding: 14px; border: none; background: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
-.tab-btn.active, .tab-btn:hover { background: #FF6B35; color: white; }
+.tab-btn { 
+  flex: 1; padding: 14px; border: none; background: none; font-weight: 600; cursor: pointer; transition: 0.3s; 
+  border-bottom: 3px solid transparent; /* FIXED: Visible outline */
+}
+.tab-btn.active, .tab-btn:hover { 
+  background: #FF6B35; color: white; border-bottom-color: #FF6B35; /* Highlight on hover/active */
+}
 
-.tab-content { padding: 24px; display: none; }
-.tab-content.active { display: block; }
+.tab-content { 
+  padding: 24px; display: none; /* FIXED: Smooth show */
+  opacity: 0; transition: opacity 0.3s; /* Fade in */
+}
+.tab-content.active { 
+  display: block; opacity: 1; 
+}
 .tab-content h2 { margin-bottom: 16px; color: #FF6B35; }
 
 input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; }
@@ -30,3 +40,7 @@ button:hover, .btn:hover { background: #e55a2b; }
 .volume-history { margin-top: 20px; }
 .volume-history ul { list-style: none; padding: 0; }
 .volume-history li { padding: 5px 0; border-bottom: 1px solid #eee; }
+
+/* NEW: Personal Volume Input Style */
+#personal-vol { width: 100%; padding: 10px; margin: 10px 0; }
+#personal-progress { color: #FF6B35; font-weight: bold; }
