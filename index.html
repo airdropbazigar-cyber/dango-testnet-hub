@@ -1,77 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dango Testnet Hub 🍡</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍡 Dango Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1>🍡 Dango Testnet Hub</h1>
-      <p>Unofficial | Track $6.9M Volume | Claim OAT Before Nov 5!</p>
+    <!-- Top Header -->
+    <header class="header">
+      <div class="logo">🍡 <span class="logo-text">Dango</span></div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for addresses or usernames..." class="search-bar">
+        <button onclick="searchAddress()" class="search-btn">Search</button>
+      </div>
+      <button class="register-btn">Register</button>
     </header>
 
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="quiz">Quiz</button>
-      <button class="tab-btn" data-tab="nft">NFT Claim</button>
-      <button class="tab-btn" data-tab="volume">Volume Tracker</button>
-      <button class="tab-btn" data-tab="feedback">Feedback</button>
-    </div>
+    <!-- Results Section (Volume + NFT) -->
+    <section class="results" id="results-section" style="display:none;">
+      <div class="card volume-card">
+        <h3>Volume Tracker</h3>
+        <p id="volume-result">Enter address to fetch real volume...</p>
+        <div id="volume-loading" class="loading" style="display:none;"></div>
+      </div>
+      <div class="card nft-card">
+        <h3>NFT Claimed?</h3>
+        <p id="nft-result">Enter address to check OAT...</p>
+        <div id="nft-loading" class="loading" style="display:none;"></div>
+      </div>
+    </section>
 
-    <!-- Tab 1: Quiz -->
-    <div id="quiz" class="tab-content active">
-      <h2>Test Your Dango Knowledge!</h2>
+    <!-- Bottom Buttons -->
+    <nav class="bottom-nav">
+      <button class="nav-btn" onclick="tradeAction()"><span>📈</span> Trade</button>
+      <button class="nav-btn" onclick="convertAction()"><span>🔄</span> Convert</button>
+      <button class="nav-btn" onclick="transferAction()"><span>➡️</span> Transfer</button>
+      <button class="nav-btn" onclick="subaccountAction()"><span>👤</span> Subaccount</button>
+      <button class="nav-btn" onclick="settingsAction()"><span>⚙️</span> Settings</button>
+      <button class="nav-btn add-btn" onclick="addAction()"><span>➕</span> +</button>
+    </nav>
+
+    <!-- Quiz Button (Bottom Right) -->
+    <button class="quiz-btn" onclick="openQuiz()">Quiz for Badge</button>
+  </div>
+
+  <!-- Quiz Modal (Overlay) -->
+  <div id="quiz-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeQuiz()">&times;</span>
+      <h2>Dango Quiz</h2>
       <div id="question"></div>
       <div id="options"></div>
-      <button id="next-btn" style="display:none">Next →</button>
+      <button id="next-btn" style="display:none;">Next</button>
       <p id="result"></p>
-      <div id="badge-section" style="display:none">
-        <canvas id="badge-canvas" width="300" height="150"></canvas>
-        <br><button onclick="downloadBadge()">Download Badge</button>
-        <p>Share your Expert Badge! 🏆</p>
-      </div>
-    </div>
-
-    <!-- Tab 2: NFT Checker -->
-    <div id="nft" class="tab-content">
-      <h2>Check Your OAT Claim</h2>
-      <input type="text" id="wallet" placeholder="Enter wallet address" />
-      <button onclick="checkNFT()">Check Status</button>
-      <p id="nft-status">Enter address to check $6.9M volume OAT (Ends Nov 5!)</p>
-      <a href="https://app.galxe.com/quest/dango" target="_blank" class="btn">Claim on Galxe →</a>
-    </div>
-
-    <!-- Tab 3: Volume Tracker -->
-    <div id="volume" class="tab-content">
-      <h2>Testnet-3 Volume Tracker</h2>
-      <p><strong>Goal:</strong> $6.9M Total (for OAT Claim)</p>
-      <div class="stat">Current Community Volume: <strong id="current-vol">$5.5M</strong> (as of Nov 4, 2025)</div>
-      <div class="progress-bar">
-        <div class="progress" id="progress-bar" style="width: 80%"></div>
-      </div>
-      <p><strong>80% Complete</strong> | <em>Update: Testnet ends tomorrow – trade now!</em></p>
-      <div class="volume-history">
-        <h3>Recent Milestones:</h3>
-        <ul>
-          <li>Oct 15: $2M hit 🚀</li>
-          <li>Oct 28: $4M unlocked</li>
-          <li>Nov 4: $5.5M (live)</li>
-          <li>Target: $6.9M by Nov 5</li>
-        </ul>
-      </div>
-      <a href="https://testnet.dango.exchange" target="_blank" class="btn">Start Trading →</a>
-    </div>
-
-    <!-- Tab 4: Feedback -->
-    <div id="feedback" class="tab-content">
-      <h2>Send Feedback</h2>
-      <textarea id="feedback-text" placeholder="CLOB speed? Volume tips? Tell the community!"></textarea>
-      <button onclick="sendFeedback()">Send →</button>
-      <p id="feedback-msg"></p>
+      <canvas id="badge-canvas" width="300" height="150" style="display:none;"></canvas>
+      <button id="download-badge" style="display:none;" onclick="downloadBadge()">Download Badge</button>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
