@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dango Testnet Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>दां</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>जा</text></svg>">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,7 +33,31 @@
       user-select: none;
     }
 
-    /* Address Input - Chhota, neeche */
+    /* MOVING DANGO EMOJI + TEXT */
+    .dango-title {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 10;
+      white-space: nowrap;
+    }
+    .moving-dango {
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+      font-size: 3rem;
+      margin: 0 15px;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Address Input */
     .input-group {
       position: absolute;
       bottom: 130px;
@@ -67,41 +91,6 @@
       font-size: 1rem;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(255,107,107,0.5);
-    }
-
-    /* Results - Do cards, center ke neeche */
-    .results {
-      position: absolute;
-      top: 55%;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 90%;
-      max-width: 700px;
-      z-index: 5;
-    }
-    .result-card {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 18px;
-      border-radius: 20px;
-      width: 280px;
-      text-align: left;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-    .result-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-    .result-card p {
-      font-size: 1.1rem;
-      color: #fff;
-      font-weight: 500;
     }
 
     /* Bottom Nav */
@@ -190,33 +179,28 @@
   <!-- DANGO WATERMARK - BADA SA CENTER MEIN -->
   <div class="dango-watermark">DANGO</div>
 
+  <!-- MOVING DANGO + TEXT -->
+  <div class="dango-title">
+    <span class="moving-dango">dango</span>
+    DANGO
+    <span class="moving-dango">dango</span>
+  </div>
+
   <!-- Address Input -->
   <div class="input-group">
     <input type="text" id="walletAddress" placeholder="Enter address..." />
     <button class="go-btn" onclick="fetchData()">GO</button>
   </div>
 
-  <!-- Results -->
-  <div class="results" id="results">
-    <div class="result-card">
-      <h3>Volume Tracker</h3>
-      <p id="volume">Enter address...</p>
-    </div>
-    <div class="result-card">
-      <h3>NFT Claimed?</h3>
-      <p id="nft-status">Check address</p>
-    </div>
-  </div>
-
   <!-- Bottom Nav -->
   <div class="bottom-nav">
     <button class="nav-btn" onclick="openModal('quiz')">
-      <span class="icon">?</span> Quiz
+      <span class="icon">Question</span> Quiz
     </button>
     <button class="nav-btn" onclick="fetchData()">
       <span class="icon">Chart</span> Volume
     </button>
-    <button class="nav-btn" onclick="alert('Feedback sent!')">
+    <button class="nav-btn" onclick="alert('Feedback sent! dango')">
       <span class="icon">Chat</span> Feedback
     </button>
     <button class="nav-btn" onclick="openModal('nft')">
@@ -249,8 +233,7 @@
       showSpinner();
 
       setTimeout(() => {
-        document.getElementById('volume').innerHTML = `<strong>$8,320</strong> volume`;
-        document.getElementById('nft-status').innerHTML = `Claimed!`;
+        alert(`Volume checked for ${addr.substring(0,8)}...!\n$8,320 traded\nNFT: Claimed!`);
         hideSpinner();
       }, 1200);
     }
@@ -260,10 +243,11 @@
       const body = document.getElementById('modal-body');
 
       if (type === 'quiz') {
-        body.innerHTML = `<h2>Dango Quiz</h2><p>Coming soon...</p>`;
+        body.innerHTML = `<h2>dango Dango Quiz</h2><p>Q: What is Dango?</p><p><em>A testnet trading hub!</em></p>
+          <button onclick="alert('Correct! +10 points')" style="margin-top:15px;padding:10px 20px;background:#ff6b6b;color:white;border:none;border-radius:8px;">Submit</button>`;
       } else if (type === 'nft') {
-        body.innerHTML = `<h2>Claim NFT</h2><p>Address: <code>${currentAddress || '—'}</code></p>
-          <button onclick="alert('NFT Claimed!')" style="margin-top:15px;padding:12px 30px;background:#ff6b6b;color:white;border:none;border-radius:12px;font-weight:600;">Claim</button>`;
+        body.innerHTML = `<h2>Trophy Claim NFT</h2><p>Address: <code>${currentAddress || '—'}</code></p>
+          <button onclick="alert('NFT Claimed! dango')" style="margin-top:15px;padding:12px 30px;background:#ff6b6b;color:white;border:none;border-radius:12px;font-weight:600;">Claim Now</button>`;
       }
       modal.classList.add('active');
     }
