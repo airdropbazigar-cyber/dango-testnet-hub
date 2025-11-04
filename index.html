@@ -7,11 +7,22 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+  <style>
+    /* NO SCROLL - SAB EK SCREEN MEIN */
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- DANGO WATERMARK (FIXED, NO SCROLL ISSUE) -->
-  <div class="dango-watermark">DANGO</div>
+  <!-- DANGO WATERMARK WITH ICONS (AAGE + PEECHE) -->
+  <div class="dango-watermark">
+    <span class="icon-left">🍡</span> DANGO <span class="icon-right">🍡</span>
+  </div>
 
   <div class="container">
     <!-- Top Bar -->
@@ -41,20 +52,16 @@
     <!-- Bottom Nav -->
     <div class="bottom-nav">
       <button class="nav-btn" onclick="openModal('quiz')">
-        <span class="icon">❓</span>
-        <span>Quiz</span>
+        <span class="icon">❓</span> Quiz
       </button>
       <button class="nav-btn" onclick="fetchData()">
-        <span class="icon">📊</span>
-        <span>Volume</span>
+        <span class="icon">📊</span> Volume
       </button>
       <button class="nav-btn" onclick="alert('Feedback sent!')">
-        <span class="icon">💬</span>
-        <span>Feedback</span>
+        <span class="icon">💬</span> Feedback
       </button>
       <button class="nav-btn" onclick="openModal('nft')">
-        <span class="icon">🏆</span>
-        <span>NFT</span>
+        <span class="icon">🏆</span> NFT
       </button>
     </div>
   </div>
@@ -70,7 +77,6 @@
   <!-- Spinner -->
   <div class="spinner" id="spinner"></div>
 
-  <!-- Badge Canvas -->
   <canvas id="badge-canvas" width="300" height="300"></canvas>
 
   <script src="script.js"></script>
