@@ -1,64 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🍡 Dango Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🍡 Dango Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <!-- Top Header -->
-    <header class="header">
-      <div class="logo">🍡 <span class="logo-text">Dango</span></div>
-      <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search for addresses or usernames..." class="search-bar">
-        <button onclick="searchAddress()" class="search-btn">Search</button>
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="logo">🍡 <span>Dango</span></div>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search for addresses..." />
+        <button onclick="searchAddress()">🔍</button>
       </div>
       <button class="register-btn">Register</button>
     </header>
 
-    <!-- Results Section (Volume + NFT) -->
-    <section class="results" id="results-section" style="display:none;">
-      <div class="card volume-card">
-        <h3>Volume Tracker</h3>
+    <!-- Results (Hidden Initially) -->
+    <div id="results" class="results">
+      <div class="result-card">
+        <h3>📊 Volume Tracker</h3>
         <p id="volume-result">Enter address to fetch real volume...</p>
-        <div id="volume-loading" class="loading" style="display:none;"></div>
+        <div id="volume-loading" class="spinner"></div>
       </div>
-      <div class="card nft-card">
-        <h3>NFT Claimed?</h3>
-        <p id="nft-result">Enter address to check OAT...</p>
-        <div id="nft-loading" class="loading" style="display:none;"></div>
+      <div class="result-card">
+        <h3>🏆 NFT Claimed?</h3>
+        <p id="nft-result">Check OAT status...</p>
+        <div id="nft-loading" class="spinner"></div>
       </div>
-    </section>
+    </div>
 
-    <!-- Bottom Buttons -->
+    <!-- Bottom 4 Buttons -->
     <nav class="bottom-nav">
-      <button class="nav-btn" onclick="tradeAction()"><span>📈</span> Trade</button>
-      <button class="nav-btn" onclick="convertAction()"><span>🔄</span> Convert</button>
-      <button class="nav-btn" onclick="transferAction()"><span>➡️</span> Transfer</button>
-      <button class="nav-btn" onclick="subaccountAction()"><span>👤</span> Subaccount</button>
-      <button class="nav-btn" onclick="settingsAction()"><span>⚙️</span> Settings</button>
-      <button class="nav-btn add-btn" onclick="addAction()"><span>➕</span> +</button>
+      <button class="nav-btn" onclick="openQuiz()">
+        <div class="icon">❓</div>
+        <span>Quiz</span>
+      </button>
+      <button class="nav-btn" onclick="alert('Volume Tracker Active!')">
+        <div class="icon">📈</div>
+        <span>Volume</span>
+      </button>
+      <button class="nav-btn" onclick="openFeedback()">
+        <div class="icon">💬</div>
+        <span>Feedback</span>
+      </button>
+      <button class="nav-btn" onclick="checkNFT(document.getElementById('search-input').value)">
+        <div class="icon">🎖️</div>
+        <span>NFT</span>
+      </button>
     </nav>
 
-    <!-- Quiz Button (Bottom Right) -->
-    <button class="quiz-btn" onclick="openQuiz()">Quiz for Badge</button>
   </div>
 
-  <!-- Quiz Modal (Overlay) -->
-  <div id="quiz-modal" class="modal" style="display:none;">
+  <!-- Quiz Modal -->
+  <div id="quiz-modal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeQuiz()">&times;</span>
-      <h2>Dango Quiz</h2>
+      <span class="close" onclick="closeQuiz()">×</span>
+      <h2>🍡 Dango Quiz</h2>
       <div id="question"></div>
       <div id="options"></div>
-      <button id="next-btn" style="display:none;">Next</button>
+      <button id="next-btn">Next →</button>
       <p id="result"></p>
-      <canvas id="badge-canvas" width="300" height="150" style="display:none;"></canvas>
-      <button id="download-badge" style="display:none;" onclick="downloadBadge()">Download Badge</button>
+      <canvas id="badge-canvas" width="300" height="150"></canvas>
+      <button id="download-badge" onclick="downloadBadge()">Download Badge</button>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div id="feedback-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeFeedback()">×</span>
+      <h2>💬 Feedback</h2>
+      <textarea id="feedback-text" placeholder="CLOB is fire!"></textarea>
+      <button onclick="sendFeedback()">Submit & Tweet</button>
     </div>
   </div>
 
