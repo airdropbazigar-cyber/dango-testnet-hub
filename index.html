@@ -6,22 +6,22 @@
   <title>Dango Testnet Hub</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Mochi</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
 </head>
 <body>
 
-  <!-- DANGO WATERMARK BACKGROUND -->
+  <!-- DANGO WATERMARK (FIXED, NO SCROLL ISSUE) -->
   <div class="dango-watermark">DANGO</div>
 
   <div class="container">
     <!-- Top Bar -->
     <div class="top-bar">
       <div class="logo">
-        <span style="color:#FF6B35;">Mochi</span> Dango
+        <span class="dango-icon">🍡</span> Dango
       </div>
       <div class="search-box">
         <input type="text" placeholder="Enter wallet address..." id="wallet-input" />
-        <button onclick="fetchData()">Search</button>
+        <button onclick="fetchData()">🔍</button>
       </div>
       <button class="register-btn" onclick="openModal()">Register</button>
     </div>
@@ -29,11 +29,11 @@
     <!-- Results -->
     <div class="results" id="results">
       <div class="result-card">
-        <h3>Mochi Volume Tracker</h3>
-        <p id="volume">Loading...</p>
+        <h3>📊 Volume Tracker</h3>
+        <p id="volume">Enter address...</p>
       </div>
       <div class="result-card">
-        <h3>Mochi NFT Claimed?</h3>
+        <h3>🏆 NFT Claimed?</h3>
         <p id="nft-status">Check address</p>
       </div>
     </div>
@@ -41,19 +41,19 @@
     <!-- Bottom Nav -->
     <div class="bottom-nav">
       <button class="nav-btn" onclick="openModal('quiz')">
-        <span class="icon">Question</span>
+        <span class="icon">❓</span>
         <span>Quiz</span>
       </button>
       <button class="nav-btn" onclick="fetchData()">
-        <span class="icon">Bar Chart</span>
+        <span class="icon">📊</span>
         <span>Volume</span>
       </button>
       <button class="nav-btn" onclick="alert('Feedback sent!')">
-        <span class="icon">Chat Bubble</span>
+        <span class="icon">💬</span>
         <span>Feedback</span>
       </button>
       <button class="nav-btn" onclick="openModal('nft')">
-        <span class="icon">Trophy</span>
+        <span class="icon">🏆</span>
         <span>NFT</span>
       </button>
     </div>
@@ -70,7 +70,7 @@
   <!-- Spinner -->
   <div class="spinner" id="spinner"></div>
 
-  <!-- Badge Canvas (Hidden) -->
+  <!-- Badge Canvas -->
   <canvas id="badge-canvas" width="300" height="300"></canvas>
 
   <script src="script.js"></script>
