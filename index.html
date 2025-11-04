@@ -19,7 +19,7 @@
       position: relative;
     }
 
-    /* DANGO WATERMARK - BADA SA CENTER MEIN */
+    /* DANGO WATERMARK - BADA SA CENTER MEIN (Halka) */
     .dango-watermark {
       position: absolute;
       top: 50%;
@@ -27,34 +27,34 @@
       transform: translate(-50%, -50%);
       font-size: 6rem;
       font-weight: 900;
-      color: rgba(255, 255, 255, 0.25);
+      color: rgba(255, 255, 255, 0.1);
       pointer-events: none;
       z-index: 1;
       user-select: none;
     }
 
-    /* MOVING DANGO EMOJI + TEXT */
+    /* MOVING DANGO + TEXT (MEDIUM SIZE) */
     .dango-title {
       position: absolute;
       top: 45%;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 3.5rem;
+      font-size: 2.8rem;           /* ← Medium size */
       font-weight: 900;
-      color: white;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      color: #ff6b6b;
+      text-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
       z-index: 10;
       white-space: nowrap;
     }
     .moving-dango {
       display: inline-block;
       animation: float 3s ease-in-out infinite;
-      font-size: 3rem;
-      margin: 0 15px;
+      font-size: 2.5rem;           /* ← Medium emoji */
+      margin: 0 12px;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-12px); }
     }
 
     /* Address Input */
@@ -72,15 +72,15 @@
     input[type="text"] {
       flex: 1;
       padding: 14px 16px;
-      border: 2px solid rgba(255,255,255,0.4);
-      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       font-size: 1rem;
       color: white;
       outline: none;
     }
-    input::placeholder { color: rgba(255,255,255,0.7); }
+    input::placeholder { color: rgba(255,255,255,0.5); }
     button.go-btn {
       padding: 0 24px;
       background: #ff6b6b;
@@ -90,7 +90,7 @@
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255,107,107,0.5);
+      box-shadow: 0 4px 20px rgba(255,107,107,0.4);
     }
 
     /* Bottom Nav */
@@ -99,9 +99,9 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255,255,255,0.1);
+      background: rgba(30, 30, 30, 0.8);
       backdrop-filter: blur(15px);
-      border-top: 1px solid rgba(255,255,255,0.2);
+      border-top: 1px solid rgba(255,255,255,0.1);
       display: flex;
       z-index: 100;
     }
@@ -110,7 +110,7 @@
       padding: 16px;
       border: none;
       background: transparent;
-      color: white;
+      color: #ddd;
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
@@ -120,8 +120,9 @@
       font-size: 1.6rem;
       margin-bottom: 4px;
     }
-    .nav-btn:active {
-      background: rgba(255,107,107,0.4);
+    .nav-btn:active, .nav-btn:hover {
+      background: rgba(255,107,107,0.2);
+      color: white;
     }
 
     /* Modal */
@@ -129,7 +130,7 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.8);
       backdrop-filter: blur(10px);
       z-index: 1000;
       align-items: center;
@@ -137,22 +138,23 @@
     }
     .modal.active { display: flex; }
     .modal-content {
-      background: white;
-      color: #333;
+      background: #222;
+      color: #eee;
       border-radius: 24px;
       padding: 30px;
       max-width: 90%;
       max-height: 80vh;
       overflow-y: auto;
       position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,107,107,0.2);
     }
     .close {
       position: absolute;
       top: 15px; right: 20px;
       font-size: 2rem;
       cursor: pointer;
-      color: #999;
+      color: #aaa;
     }
     .close:hover { color: #ff6b6b; }
 
@@ -163,7 +165,7 @@
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: 50px; height: 50px;
-      border: 6px solid rgba(255,255,255,0.3);
+      border: 6px solid rgba(255,255,255,0.1);
       border-top: 6px solid #ff6b6b;
       border-radius: 50%;
       animation: spin 1s linear infinite;
@@ -176,14 +178,14 @@
 </head>
 <body>
 
-  <!-- DANGO WATERMARK - BADA SA CENTER MEIN -->
-  <div class="dango-watermark">Đ₳₦₲Ø</div>
+  <!-- DANGO WATERMARK (Halka Background Mein) -->
+  <div class="dango-watermark">DANGO</div>
 
-  <!-- MOVING DANGO + TEXT -->
+  <!-- MOVING DANGO + TEXT (MEDIUM SIZE) -->
   <div class="dango-title">
-    <span class="moving-dango">🍡</span>
+    <span class="moving-dango">dango</span>
     DANGO
-    <span class="moving-dango">🍡</span>
+    <span class="moving-dango">dango</span>
   </div>
 
   <!-- Address Input -->
@@ -211,7 +213,7 @@
   <!-- Modal -->
   <div class="modal" id="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">×</span>
+      <span class="close" onclick="closeModal()">X</span>
       <div id="modal-body"></div>
     </div>
   </div>
@@ -227,7 +229,7 @@
     function fetchData() {
       const addr = document.getElementById('walletAddress').value.trim();
       if (!addr) return alert('Enter address!');
-      if (!addr.startsWith('0x')) return alert('Invalid address!');
+      if (!addr.startsWith('0x') || addr.length !== 42) return alert('Invalid address!');
 
       currentAddress = addr;
       showSpinner();
@@ -243,11 +245,18 @@
       const body = document.getElementById('modal-body');
 
       if (type === 'quiz') {
-        body.innerHTML = `<h2>dango Dango Quiz</h2><p>Q: What is Dango?</p><p><em>A testnet trading hub!</em></p>
-          <button onclick="alert('Correct! +10 points')" style="margin-top:15px;padding:10px 20px;background:#ff6b6b;color:white;border:none;border-radius:8px;">Submit</button>`;
+        body.innerHTML = `
+          <h2 style="color:#ff6b6b">dango Dango Quiz</h2>
+          <p><strong>Q: What is Dango?</strong></p>
+          <p><em>A testnet trading hub with rewards!</em></p>
+          <button onclick="alert('Correct! +10 points')" style="margin-top:15px;padding:10px 20px;background:#ff6b6b;color:white;border:none;border-radius:8px;cursor:pointer;">Submit</button>
+        `;
       } else if (type === 'nft') {
-        body.innerHTML = `<h2>Trophy Claim NFT</h2><p>Address: <code>${currentAddress || '—'}</code></p>
-          <button onclick="alert('NFT Claimed! dango')" style="margin-top:15px;padding:12px 30px;background:#ff6b6b;color:white;border:none;border-radius:12px;font-weight:600;">Claim Now</button>`;
+        body.innerHTML = `
+          <h2 style="color:#ff6b6b">Trophy Claim NFT</h2>
+          <p>Address: <code>${currentAddress || '—'}</code></p>
+          ${currentAddress ? '<button onclick="alert(\'NFT Claimed! dango\')" style="margin-top:15px;padding:12px 30px;background:#ff6b6b;color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Claim Now</button>' : '<p style="color:#aaa">Enter address first</p>'}
+        `;
       }
       modal.classList.add('active');
     }
@@ -259,7 +268,11 @@
     function showSpinner() { document.getElementById('spinner').style.display = 'block'; }
     function hideSpinner() { document.getElementById('spinner').style.display = 'none'; }
 
-    window.onclick = e => { if (e.target.id === 'modal') closeModal(); };
+    // Close modal on outside click
+    window.onclick = function(e) {
+      const modal = document.getElementById('modal');
+      if (e.target === modal) closeModal();
+    }
   </script>
 </body>
 </html>
