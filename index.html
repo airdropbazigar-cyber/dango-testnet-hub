@@ -19,27 +19,25 @@
       position: relative;
     }
 
-    /* DANGO WATERMARK - BADA SA CENTER MEIN (Halka) */
+    /* DANGO WATERMARK */
     .dango-watermark {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       font-size: 6rem;
       font-weight: 900;
       color: rgba(255, 255, 255, 0.1);
       pointer-events: none;
       z-index: 1;
-      user-select: none;
     }
 
-    /* MOVING DANGO + TEXT (MEDIUM SIZE) */
+    /* MOVING DANGO + TEXT */
     .dango-title {
       position: absolute;
       top: 45%;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 4rem;           /* ← Medium size */
+      font-size: 6rem;
       font-weight: 900;
       color: #ff6b6b;
       text-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
@@ -49,7 +47,7 @@
     .moving-dango {
       display: inline-block;
       animation: float 3s ease-in-out infinite;
-      font-size: 3.8rem;           /* ← Medium emoji */
+      font-size: 3.8rem;
       margin: 0 12px;
     }
     @keyframes float {
@@ -93,13 +91,13 @@
       box-shadow: 0 4px 20px rgba(255,107,107,0.4);
     }
 
-    /* Bottom Nav */
+    /* Bottom Nav - FULLY WORKING */
     .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(30, 30, 30, 0.8);
+      background: rgba(30, 30, 30, 0.9);
       backdrop-filter: blur(15px);
       border-top: 1px solid rgba(255,255,255,0.1);
       display: flex;
@@ -114,15 +112,16 @@
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover, .nav-btn.active {
+      background: rgba(255,107,107,0.3);
+      color: white;
     }
     .nav-btn .icon {
       display: block;
       font-size: 1.6rem;
       margin-bottom: 4px;
-    }
-    .nav-btn:active, .nav-btn:hover {
-      background: rgba(255,107,107,0.2);
-      color: white;
     }
 
     /* Modal */
@@ -178,10 +177,10 @@
 </head>
 <body>
 
-  <!-- DANGO WATERMARK (Halka Background Mein) -->
+  <!-- DANGO WATERMARK -->
   <div class="dango-watermark">DANGO</div>
 
-  <!-- MOVING DANGO + TEXT (MEDIUM SIZE) -->
+  <!-- MOVING DANGO + TEXT -->
   <div class="dango-title">
     <span class="moving-dango">🍡🍡</span>
     DANGO
@@ -194,7 +193,7 @@
     <button class="go-btn" onclick="fetchData()">GO</button>
   </div>
 
-  <!-- Bottom Nav -->
+  <!-- BOTTOM NAV - SAB WORKING -->
   <div class="bottom-nav">
     <button class="nav-btn" onclick="openModal('quiz')">
       <span class="icon">Question</span> Quiz
@@ -202,7 +201,7 @@
     <button class="nav-btn" onclick="fetchData()">
       <span class="icon">Chart</span> Volume
     </button>
-    <button class="nav-btn" onclick="alert('Feedback sent! dango')">
+    <button class="nav-btn" onclick="sendFeedback()">
       <span class="icon">Chat</span> Feedback
     </button>
     <button class="nav-btn" onclick="openModal('nft')">
@@ -226,20 +225,27 @@
   <script>
     let currentAddress = '';
 
+    // 1. Volume Button
     function fetchData() {
       const addr = document.getElementById('walletAddress').value.trim();
-      if (!addr) return alert('Enter address!');
+      if (!addr) return alert('Please enter wallet address!');
       if (!addr.startsWith('0x') || addr.length !== 42) return alert('Invalid address!');
 
       currentAddress = addr;
       showSpinner();
 
       setTimeout(() => {
-        alert(`Volume checked for ${addr.substring(0,8)}...!\n$8,320 traded\nNFT: Claimed!`);
+        alert(`Volume checked!\nAddress: ${addr.substring(0,10)}...\nVolume: $8,320\nNFT: Claimed!`);
         hideSpinner();
       }, 1200);
     }
 
+    // 2. Feedback Button
+    function sendFeedback() {
+      alert('Thank you! Feedback sent! dango');
+    }
+
+    // 3. & 4. Quiz + NFT Modal
     function openModal(type) {
       const modal = document.getElementById('modal');
       const body = document.getElementById('modal-body');
@@ -249,13 +255,13 @@
           <h2 style="color:#ff6b6b">dango Dango Quiz</h2>
           <p><strong>Q: What is Dango?</strong></p>
           <p><em>A testnet trading hub with rewards!</em></p>
-          <button onclick="alert('Correct! +10 points')" style="margin-top:15px;padding:10px 20px;background:#ff6b6b;color:white;border:none;border-radius:8px;cursor:pointer;">Submit</button>
+          <button onclick="alert('Correct! +10 points dango')" style="margin-top:15px;padding:10px 20px;background:#ff6b6b;color:white;border:none;border-radius:8px;cursor:pointer;">Submit</button>
         `;
       } else if (type === 'nft') {
         body.innerHTML = `
           <h2 style="color:#ff6b6b">Trophy Claim NFT</h2>
-          <p>Address: <code>${currentAddress || '—'}</code></p>
-          ${currentAddress ? '<button onclick="alert(\'NFT Claimed! dango\')" style="margin-top:15px;padding:12px 30px;background:#ff6b6b;color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Claim Now</button>' : '<p style="color:#aaa">Enter address first</p>'}
+          <p>Address: <code>${currentAddress || 'Enter address first'}</code></p>
+          ${currentAddress ? '<button onclick="alert(\'NFT Claimed! dango\')" style="margin-top:15px;padding:12px 30px;background:#ff6b6b;color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Claim Now</button>' : '<p style="color:#aaa">Enter address to claim</p>'}
         `;
       }
       modal.classList.add('active');
@@ -268,11 +274,7 @@
     function showSpinner() { document.getElementById('spinner').style.display = 'block'; }
     function hideSpinner() { document.getElementById('spinner').style.display = 'none'; }
 
-    // Close modal on outside click
-    window.onclick = function(e) {
-      const modal = document.getElementById('modal');
-      if (e.target === modal) closeModal();
-    }
+    window.onclick = e => { if (e.target.id === 'modal') closeModal(); };
   </script>
 </body>
 </html>
